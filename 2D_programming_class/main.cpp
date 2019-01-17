@@ -39,6 +39,8 @@ int main(int argc, char **argv)
 	SDL_Surface *your_draw_buffer = SDL_CreateRGBSurfaceWithFormat(0, screen_width, screen_height, 24, SDL_PIXELFORMAT_RGB24);
 	SDL_Surface *screen = SDL_GetWindowSurface(window);
 
+	unsigned char *my_own_buffer = (unsigned char*)malloc(sizeof(unsigned char)*screen_width*screen_height * 3);
+
 	for(;;)
 	{
 		memcpy(prev_key_state, keys, 256);
@@ -53,6 +55,17 @@ int main(int argc, char **argv)
 			}
 		}
 
+		
+
+		for (int i = 0; i < screen_width*screen_height; i++)
+		{
+			my_own_buffer[i*3] = rand() % 256;
+			my_own_buffer[i * 3 + 1] = 0;//rand() % 256;
+			my_own_buffer[i * 3 + 2] = rand() % 257;
+
+		}
+
+		memcpy(your_draw_buffer->pixels, my_own_buffer, sizeof(unsigned char)*screen_width*screen_height * 3);
 		
 		//BLIT BUFFER TO SCREEN
 		SDL_BlitScaled(your_draw_buffer, NULL, screen, NULL);
