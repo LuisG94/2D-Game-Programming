@@ -1,2 +1,4 @@
 ﻿  main.cpp
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main.cpp(103): warning C4305: '=': truncation from 'int' to 'unsigned char'
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main.cpp(103): warning C4309: '=': truncation of constant value
   SDL_intro.vcxproj -> C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class\Debug\SDL_intro.exe
