@@ -1,11 +1,6 @@
-﻿  main.cpp
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main.cpp(70): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main.cpp(80): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main.cpp(81): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main.cpp(82): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main.cpp(83): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
+﻿  main_PONG.cpp
   Generating code
-  2 of 4 functions (50.0%) were compiled, the rest were copied from previous compilation.
+  1 of 3 functions (33.3%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
