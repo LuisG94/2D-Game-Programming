@@ -1,4 +1,7 @@
 ﻿  main_PONG.cpp
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main_pong.cpp(119): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main_pong.cpp(120): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main_pong.cpp(168): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
   Generating code
   1 of 3 functions (33.3%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation

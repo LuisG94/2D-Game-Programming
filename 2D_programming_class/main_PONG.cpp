@@ -90,10 +90,10 @@ float paddle2(unsigned char *dest, int x, int y, int w, int h, int r, int g, int
 	fill_Rectangle(dest, screen_width, screen_height, x, y, w, h, r, g, b, a);
 }
 
-float ball(unsigned char *dest, int x, int y, int w, int h, int spx, int spy, int r, int g, int b, int a)
-{
-	fill_Rectangle(dest, screen_width, screen_height, x, y, w, h, r, g, b, a);
-}
+//float ball(unsigned char *dest, int x, int y, int w, int h, int spx, int spy, int r, int g, int b, int a)
+//{
+//		fill_Rectangle(dest, screen_width, screen_height, x *spx, y * spy, w, h, r, g, b, a);		
+//}
 
 int main(int argc, char **argv)
 {
@@ -114,14 +114,33 @@ int main(int argc, char **argv)
 	SDL_Surface *screen = SDL_GetWindowSurface(window);
 
 	float *dat = new float[screen_width * screen_height];
-
 	unsigned char *my_own_buffer = (unsigned char*)malloc(sizeof(unsigned char)*screen_width*screen_height * 4);
+
+	float bspx = .01;
+	float bspy = .02;
+	float ballx = 390.0;
+	float bally = 300.0;
+	int bw = 25;
+	int bh = 25;
 
 	for (;;)
 	{
 		memcpy(prev_key_state, keys, 256);
 
+		//clears screen
+		for (int i = 0; i < screen_width*screen_height; i++)
+		{
+			my_own_buffer[i * 4] = 0;
+			my_own_buffer[i * 4 + 1] = 0;
+			my_own_buffer[i * 4 + 2] = 0;
+			my_own_buffer[i * 4 + 3] = 0;
 
+		}
+
+		ballx += bspx;
+		bally += bspy;
+
+		
 
 		//consume all window events first
 		SDL_Event event;
@@ -134,19 +153,22 @@ int main(int argc, char **argv)
 		}
 
 		//screen buffer
-		for (int i = 0; i < screen_width*screen_height; i++)
+		/*for (int i = 0; i < screen_width*screen_height; i++)
 		{
 			my_own_buffer[i * 4] = 200;
 			my_own_buffer[i * 4 + 1] = 200;
 			my_own_buffer[i * 4 + 2] = 200;
 			my_own_buffer[i * 4 + 3] = 0;
-		}
+		}*/
 
 		//paddle1(my_own_buffer, 100, 100, 50, 150, 255, 255, 255, 255);
 
-		fill_Rectangle(my_own_buffer, screen_width, screen_height, 100, 200, 50, 200, 255, 255, 255, 255);
-		fill_Rectangle(my_own_buffer, screen_width, screen_height, 650, 200, 50, 200, 255, 255, 255, 255);
-		fill_Rectangle(my_own_buffer, screen_width, screen_height, 390, 300, 25, 25, 255, 255, 255, 255);
+		//ball(my_own_buffer, 390, 300, 25, 25, .5, .2, 255, 255, 255, 255);
+
+		fill_Rectangle(my_own_buffer, screen_width, screen_height, ballx, bally, bw, bh, 255, 255, 255, 255);
+		fill_Rectangle(my_own_buffer, screen_width, screen_height, 100, 200, 25, 150, 255, 255, 255, 255);
+		fill_Rectangle(my_own_buffer, screen_width, screen_height, 650, 200, 25, 150, 255, 255, 255, 255);
+		
 
 		memcpy(your_draw_buffer->pixels, my_own_buffer, sizeof(unsigned char)*screen_width*screen_height * 4);
 
