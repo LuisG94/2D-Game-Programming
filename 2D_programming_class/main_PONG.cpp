@@ -162,6 +162,33 @@ int main(int argc, char **argv)
 
 		ball_x += ball_force_x;
 		ball_y += ball_force_y;
+
+		if (ball_x < 290)
+		{
+			left_paddle_y = ball_y;
+		}
+		else
+		{
+			right_paddle_y = ball_y;
+		}
+
+		if (left_paddle_y > screen_height - paddle_h)
+		{
+			left_paddle_y = screen_height - paddle_h;
+		}
+		if (left_paddle_y < paddle_h)
+		{
+			left_paddle_y = paddle_h;
+		}
+		if (right_paddle_y > screen_height - paddle_h)
+		{
+			right_paddle_y = screen_height - paddle_h;
+		}
+		if (right_paddle_y < paddle_h)
+		{
+			right_paddle_y = paddle_h;
+		}
+
 		//screen buffer
 		/*for (int i = 0; i < screen_width*screen_height; i++)
 		{
@@ -170,10 +197,6 @@ int main(int argc, char **argv)
 			my_own_buffer[i * 4 + 2] = 200;
 			my_own_buffer[i * 4 + 3] = 0;
 		}*/
-
-		//paddle1(my_own_buffer, 100, 100, 50, 150, 255, 255, 255, 255);
-
-		//ball(my_own_buffer, 390, 300, 25, 25, .5, .2, 255, 255, 255, 255);
 
 		//ball
 		fill_Rectangle(my_own_buffer, screen_width, screen_height, ball_x, ball_y, ball_size, ball_size, 220, 25, 155, 255);
