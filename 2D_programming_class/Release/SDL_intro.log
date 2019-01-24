@@ -1,8 +1,22 @@
-﻿  main_PONG.cpp
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main_pong.cpp(164): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+﻿  main (1).cpp
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main (1).cpp(65): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main (1).cpp(73): warning C4244: '=': conversion from 'float' to 'unsigned char', possible loss of data
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main (1).cpp(74): warning C4244: '=': conversion from 'float' to 'unsigned char', possible loss of data
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main (1).cpp(75): warning C4244: '=': conversion from 'float' to 'unsigned char', possible loss of data
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main (1).cpp(101): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main (1).cpp(103): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main (1).cpp(113): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main (1).cpp(116): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main (1).cpp(190): warning C4305: '*=': truncation from 'double' to 'float'
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main (1).cpp(196): warning C4305: '*=': truncation from 'double' to 'float'
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main (1).cpp(214): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main (1).cpp(218): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main (1).cpp(222): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main (1).cpp(226): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main (1).cpp(231): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main (1).cpp(234): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main (1).cpp(237): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
   Generating code
-  1 of 3 functions (33.3%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+  All 3 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   Finished generating code
   SDL_intro.vcxproj -> C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class\Release\SDL_intro.exe

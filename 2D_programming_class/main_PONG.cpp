@@ -105,10 +105,10 @@ int main(int argc, char **argv)
 	int ball_size = 25;
 	int paddle_h = 150;
 	int paddle_w = 25;
-	float left_paddle_x = 22;
-	float left_paddle_y = 22;
-	float right_paddle_x = 32;
-	float right_paddle_y = 33;
+	float left_paddle_x = 650;
+	float left_paddle_y = 200;
+	float right_paddle_x = 10;
+	float right_paddle_y = 200;
 
 	for (;;)
 	{
@@ -124,8 +124,8 @@ int main(int argc, char **argv)
 
 		}
 
-		ball_x += ball_force_x;
-		ball_y += ball_force_y;
+		//ball_x += ball_force_x;
+		//ball_y += ball_force_y;
 
 		
 
@@ -175,9 +175,12 @@ int main(int argc, char **argv)
 
 		//ball(my_own_buffer, 390, 300, 25, 25, .5, .2, 255, 255, 255, 255);
 
-		fill_Rectangle(my_own_buffer, screen_width, screen_height, ball_x, ball_y, ball_w, ball_h, 220, 25, 155, 255);
-		fill_Rectangle(my_own_buffer, screen_width, screen_height, 100, 200, 25, 150, 255, 255, 255, 255);
-		fill_Rectangle(my_own_buffer, screen_width, screen_height, 650, 200, 25, 150, 255, 255, 255, 255);
+		//ball
+		fill_Rectangle(my_own_buffer, screen_width, screen_height, ball_x, ball_y, ball_size, ball_size, 220, 25, 155, 255);
+		//right
+		fill_Rectangle(my_own_buffer, screen_width, screen_height, right_paddle_x, right_paddle_y, paddle_w, paddle_h, 255, 255, 255, 255);
+		//left
+		fill_Rectangle(my_own_buffer, screen_width, screen_height, left_paddle_x, right_paddle_y, paddle_w, paddle_h, 255, 255, 255, 255);
 		
 
 		memcpy(your_draw_buffer->pixels, my_own_buffer, sizeof(unsigned char)*screen_width*screen_height * 4);
