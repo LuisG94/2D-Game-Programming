@@ -102,8 +102,9 @@ int main(int argc, char **argv)
 	float ball_force_y = 1;
 	float ball_x = 390.0;
 	float ball_y = 300.0;
-	int ball_w = 25;
-	int ball_h = 25;
+	int ball_size = 25;
+	int paddle_h = 150;
+	int paddle_w = 25;
 	float left_paddle_x = 22;
 	float left_paddle_y = 22;
 	float right_paddle_x = 32;
@@ -138,16 +139,29 @@ int main(int argc, char **argv)
 			}
 		}
 
-		if (ball_x <= 0 || ball_x >= screen_width - ball_w)
+		//ball screen collision
+		if (ball_x <= 0 || ball_x >= screen_width - ball_size)
 		{
 			ball_force_x *= -1;
 		}
-		if (ball_y <= 0 || ball_y >= screen_height - ball_h)
+		if (ball_y <= 0 || ball_y >= screen_height - ball_size)
 		{
 			ball_force_y *= -1;
 		}
 		
+		//left paddle collision
+		if (ball_x <= left_paddle_x + paddle_w && ball_y + ball_size <= left_paddle_y + paddle_h && ball_y + paddle_h <= left_paddle_y + paddle_h)
+		{
+			ball_force_x *= -1;
+		}
+		//right paddle collision
+		if (ball_x + ball_size >= right_paddle_x && ball_y + ball_size >= right_paddle_y && ball_y + ball_size <= right_paddle_y + paddle_h)
+		{
+			ball_force_x *= -1;
+		}
 
+		ball_x += ball_force_x;
+		ball_y += ball_force_y;
 		//screen buffer
 		/*for (int i = 0; i < screen_width*screen_height; i++)
 		{
