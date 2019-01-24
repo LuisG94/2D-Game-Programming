@@ -160,11 +160,11 @@ int main(int argc, char **argv)
 
 		if (ball_x < 300)
 		{
-			left_paddle_y = ball_y + 10;
+			left_paddle_y = ball_y;
 		}
-		else
+		else if (ball_x > 300)
 		{
-			right_paddle_y = ball_y + 10;
+			right_paddle_y = ball_y;
 		}
 
 		if (left_paddle_y > screen_height - paddle_h)
@@ -195,9 +195,9 @@ int main(int argc, char **argv)
 
 		//ball
 		fill_Rectangle(my_own_buffer, screen_width, screen_height, ball_x, ball_y, ball_size, ball_size, 220, 25, 155, 255);
-		//right
+		//right paddle
 		fill_Rectangle(my_own_buffer, screen_width, screen_height, right_paddle_x, right_paddle_y, paddle_w, paddle_h, 255, 255, 255, 255);
-		//left
+		//left paddle
 		fill_Rectangle(my_own_buffer, screen_width, screen_height, left_paddle_x, left_paddle_y, paddle_w, paddle_h, 255, 255, 255, 255);
 		
 

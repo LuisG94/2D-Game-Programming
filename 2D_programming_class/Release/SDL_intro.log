@@ -1,11 +1,11 @@
 ﻿  main_PONG.cpp
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main_pong.cpp(177): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main_pong.cpp(181): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main_pong.cpp(185): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main_pong.cpp(189): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main_pong.cpp(202): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main_pong.cpp(204): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main_pong.cpp(206): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main_pong.cpp(172): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main_pong.cpp(176): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main_pong.cpp(180): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main_pong.cpp(184): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main_pong.cpp(197): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main_pong.cpp(199): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main_pong.cpp(201): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
   Generating code
   1 of 3 functions (33.3%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
