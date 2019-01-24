@@ -1,9 +1,13 @@
 ﻿  main_PONG.cpp
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main_pong.cpp(188): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main_pong.cpp(190): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main_pong.cpp(192): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main_pong.cpp(177): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main_pong.cpp(181): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main_pong.cpp(185): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main_pong.cpp(189): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main_pong.cpp(202): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main_pong.cpp(204): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\main_pong.cpp(206): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
   Generating code
-  3 of 3 functions (100.0%) were compiled.
+  1 of 3 functions (33.3%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code

@@ -100,15 +100,15 @@ int main(int argc, char **argv)
 
 	float ball_force_x = 1;
 	float ball_force_y = 1;
-	float ball_x = 390.0;
+	float ball_x = 400.0;
 	float ball_y = 300.0;
-	int ball_size = 25;
-	int paddle_h = 150;
+	int ball_size = 15;
+	int paddle_h = 70;
 	int paddle_w = 25;
-	float left_paddle_x = 650;
-	float left_paddle_y = 200;
-	float right_paddle_x = 10;
-	float right_paddle_y = 200;
+	float left_paddle_x = 50;
+	float left_paddle_y = 270;
+	float right_paddle_x = 720;
+	float right_paddle_y = 270;
 
 	for (;;)
 	{
@@ -123,11 +123,6 @@ int main(int argc, char **argv)
 			my_own_buffer[i * 4 + 3] = 0;
 
 		}
-
-		//ball_x += ball_force_x;
-		//ball_y += ball_force_y;
-
-		
 
 		//consume all window events first
 		SDL_Event event;
@@ -163,18 +158,18 @@ int main(int argc, char **argv)
 		ball_x += ball_force_x;
 		ball_y += ball_force_y;
 
-		if (ball_x < 290)
+		if (ball_x < 300)
 		{
-			left_paddle_y = ball_y;
+			left_paddle_y = ball_y + 10;
 		}
 		else
 		{
-			right_paddle_y = ball_y;
+			right_paddle_y = ball_y + 10;
 		}
 
 		if (left_paddle_y > screen_height - paddle_h)
 		{
-			left_paddle_y = screen_height - paddle_h;
+			left_paddle_y = screen_height - paddle_h - 5;
 		}
 		if (left_paddle_y < paddle_h)
 		{
@@ -182,7 +177,7 @@ int main(int argc, char **argv)
 		}
 		if (right_paddle_y > screen_height - paddle_h)
 		{
-			right_paddle_y = screen_height - paddle_h;
+			right_paddle_y = screen_height - paddle_h - 5;
 		}
 		if (right_paddle_y < paddle_h)
 		{
@@ -203,7 +198,7 @@ int main(int argc, char **argv)
 		//right
 		fill_Rectangle(my_own_buffer, screen_width, screen_height, right_paddle_x, right_paddle_y, paddle_w, paddle_h, 255, 255, 255, 255);
 		//left
-		fill_Rectangle(my_own_buffer, screen_width, screen_height, left_paddle_x, right_paddle_y, paddle_w, paddle_h, 255, 255, 255, 255);
+		fill_Rectangle(my_own_buffer, screen_width, screen_height, left_paddle_x, left_paddle_y, paddle_w, paddle_h, 255, 255, 255, 255);
 		
 
 		memcpy(your_draw_buffer->pixels, my_own_buffer, sizeof(unsigned char)*screen_width*screen_height * 4);
