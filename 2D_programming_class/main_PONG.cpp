@@ -14,9 +14,6 @@ using namespace std;
 #pragma comment(linker,"/subsystem:console")
 
 
-
-
-
 SDL_Renderer *renderer = NULL;
 int screen_width = 800;
 int screen_height = 600;
@@ -27,7 +24,7 @@ SDL_Window *window = NULL;
 
 void set_Pixel(unsigned char* buffer, int width, int x, int y, int r, int g, int b, int a)
 {
-	int first_byte_of_the_pixel = y * width * 3 + x * 3;
+	int first_byte_of_the_pixel = y * width * 4 + x * 4;
 	buffer[first_byte_of_the_pixel] = r;
 	buffer[first_byte_of_the_pixel + 1] = g;
 	buffer[first_byte_of_the_pixel + 2] = b;
@@ -80,21 +77,6 @@ void draw_Line(unsigned char *dest, int x0, int y0, int x1, int y1, int r, int g
 	}
 }
 
-float paddle1(unsigned char *dest, int x, int y, int w, int h, int r, int g, int b, int a)
-{
-	fill_Rectangle(dest, screen_width, screen_height, x, y, w, h, r, g, b, a);
-}
-
-float paddle2(unsigned char *dest, int x, int y, int w, int h, int r, int g, int b, int a)
-{
-	fill_Rectangle(dest, screen_width, screen_height, x, y, w, h, r, g, b, a);
-}
-
-//float ball(unsigned char *dest, int x, int y, int w, int h, int spx, int spy, int r, int g, int b, int a)
-//{
-//		fill_Rectangle(dest, screen_width, screen_height, x *spx, y * spy, w, h, r, g, b, a);		
-//}
-
 int main(int argc, char **argv)
 {
 	SDL_Init(SDL_INIT_VIDEO);
@@ -112,16 +94,20 @@ int main(int argc, char **argv)
 
 	SDL_Surface *your_draw_buffer = SDL_CreateRGBSurfaceWithFormat(0, screen_width, screen_height, 32, SDL_PIXELFORMAT_RGBA32);
 	SDL_Surface *screen = SDL_GetWindowSurface(window);
-
-	float *dat = new float[screen_width * screen_height];
+	SDL_SetSurfaceBlendMode(your_draw_buffer, SDL_BLENDMODE_NONE);
 	unsigned char *my_own_buffer = (unsigned char*)malloc(sizeof(unsigned char)*screen_width*screen_height * 4);
+	float *dat = new float[screen_width * screen_height];
 
-	float bspx = .01;
-	float bspy = .02;
-	float ballx = 390.0;
-	float bally = 300.0;
-	int bw = 25;
-	int bh = 25;
+	float ball_force_x = 1;
+	float ball_force_y = 1;
+	float ball_x = 390.0;
+	float ball_y = 300.0;
+	int ball_w = 25;
+	int ball_h = 25;
+	float left_paddle_x = 22;
+	float left_paddle_y = 22;
+	float right_paddle_x = 32;
+	float right_paddle_y = 33;
 
 	for (;;)
 	{
@@ -137,8 +123,8 @@ int main(int argc, char **argv)
 
 		}
 
-		ballx += bspx;
-		bally += bspy;
+		ball_x += ball_force_x;
+		ball_y += ball_force_y;
 
 		
 
@@ -151,6 +137,16 @@ int main(int argc, char **argv)
 				exit(0);
 			}
 		}
+
+		if (ball_x <= 0 || ball_x >= screen_width - ball_w)
+		{
+			ball_force_x *= -1;
+		}
+		if (ball_y <= 0 || ball_y >= screen_height - ball_h)
+		{
+			ball_force_y *= -1;
+		}
+		
 
 		//screen buffer
 		/*for (int i = 0; i < screen_width*screen_height; i++)
@@ -165,7 +161,7 @@ int main(int argc, char **argv)
 
 		//ball(my_own_buffer, 390, 300, 25, 25, .5, .2, 255, 255, 255, 255);
 
-		fill_Rectangle(my_own_buffer, screen_width, screen_height, ballx, bally, bw, bh, 255, 255, 255, 255);
+		fill_Rectangle(my_own_buffer, screen_width, screen_height, ball_x, ball_y, ball_w, ball_h, 220, 25, 155, 255);
 		fill_Rectangle(my_own_buffer, screen_width, screen_height, 100, 200, 25, 150, 255, 255, 255, 255);
 		fill_Rectangle(my_own_buffer, screen_width, screen_height, 650, 200, 25, 150, 255, 255, 255, 255);
 		

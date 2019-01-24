@@ -119,7 +119,7 @@ int main(int argc, char **argv)
 
 	SDL_Surface *your_draw_buffer = SDL_CreateRGBSurfaceWithFormat(0, screen_width, screen_height, 32, SDL_PIXELFORMAT_RGBA32);
 	SDL_Surface *screen = SDL_GetWindowSurface(window);
-
+	SDL_SetSurfaceBlendMode(your_draw_buffer, SDL_BLENDMODE_NONE);
 	float *dat = new float[screen_width * screen_height];
 
 	unsigned char *my_own_buffer = (unsigned char*)malloc(sizeof(unsigned char)*screen_width*screen_height * 4);
