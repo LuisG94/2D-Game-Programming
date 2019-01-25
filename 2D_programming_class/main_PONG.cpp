@@ -4,12 +4,10 @@ using namespace std;
 
 //include SDL header
 #include "SDL2-2.0.8\include\SDL.h"
-#include "SDL2-2.0.8\include\SDL_image.h"
 
 //load libraries
 #pragma comment(lib,"SDL2-2.0.8\\lib\\x86\\SDL2.lib")
 #pragma comment(lib,"SDL2-2.0.8\\lib\\x86\\SDL2main.lib")
-#pragma comment(lib,"SDL2-2.0.8\\lib\\x86\\SDL2_image.lib")
 
 #pragma comment(linker,"/subsystem:console")
 
@@ -21,15 +19,6 @@ int screen_height = 600;
 unsigned char prev_key_state[256];
 unsigned char *keys = NULL;
 SDL_Window *window = NULL;
-
-void set_Pixel(unsigned char* buffer, int width, int x, int y, int r, int g, int b, int a)
-{
-	int first_byte_of_the_pixel = y * width * 4 + x * 4;
-	buffer[first_byte_of_the_pixel] = r;
-	buffer[first_byte_of_the_pixel + 1] = g;
-	buffer[first_byte_of_the_pixel + 2] = b;
-	buffer[first_byte_of_the_pixel + 3] = a;
-}
 
 //Alternative example
 struct Pixel
@@ -107,22 +96,14 @@ int main(int argc, char **argv)
 	int paddle_w = 25;
 	float left_paddle_x = 50;
 	float left_paddle_y = 270;
+	float left_paddle_force = 1;
 	float right_paddle_x = 720;
 	float right_paddle_y = 270;
+	float right_paddle_force = 1;
 
 	for (;;)
 	{
 		memcpy(prev_key_state, keys, 256);
-
-		//clears screen
-		for (int i = 0; i < screen_width*screen_height; i++)
-		{
-			my_own_buffer[i * 4] = 0;
-			my_own_buffer[i * 4 + 1] = 0;
-			my_own_buffer[i * 4 + 2] = 0;
-			my_own_buffer[i * 4 + 3] = 0;
-
-		}
 
 		//consume all window events first
 		SDL_Event event;
@@ -158,40 +139,51 @@ int main(int argc, char **argv)
 		ball_x += ball_force_x;
 		ball_y += ball_force_y;
 
-		if (ball_x < 300)
+		if (ball_x < 400 && ball_y < 300)
 		{
-			left_paddle_y = ball_y;
+			left_paddle_y += -1.5;
 		}
-		else if (ball_x > 300)
+		if (ball_x > 400 && ball_y < 300)
 		{
-			right_paddle_y = ball_y;
+			right_paddle_y += -1.5;
 		}
-
+		if (ball_x < 400 && ball_y > 300)
+		{
+			left_paddle_y += 1.5;
+		}
+		if (ball_x > 400 && ball_y > 300)
+		{
+			right_paddle_y += 1.5;
+		}
+		
+		//if left paddle y is greater than screen height
 		if (left_paddle_y > screen_height - paddle_h)
 		{
-			left_paddle_y = screen_height - paddle_h - 5;
+			left_paddle_y = screen_height - paddle_h;
 		}
-		if (left_paddle_y < paddle_h)
+		if (left_paddle_y < 0)
 		{
-			left_paddle_y = paddle_h;
+			left_paddle_y -= paddle_h;
 		}
+		//if right paddle y is greater than screen height
 		if (right_paddle_y > screen_height - paddle_h)
 		{
-			right_paddle_y = screen_height - paddle_h - 5;
+			right_paddle_y = screen_height - paddle_h;
 		}
 		if (right_paddle_y < paddle_h)
 		{
 			right_paddle_y = paddle_h;
 		}
 
-		//screen buffer
-		/*for (int i = 0; i < screen_width*screen_height; i++)
+		//clears screen
+		for (int i = 0; i < screen_width*screen_height; i++)
 		{
-			my_own_buffer[i * 4] = 200;
-			my_own_buffer[i * 4 + 1] = 200;
-			my_own_buffer[i * 4 + 2] = 200;
+			my_own_buffer[i * 4] = 0;
+			my_own_buffer[i * 4 + 1] = 0;
+			my_own_buffer[i * 4 + 2] = 0;
 			my_own_buffer[i * 4 + 3] = 0;
-		}*/
+
+		}
 
 		//ball
 		fill_Rectangle(my_own_buffer, screen_width, screen_height, ball_x, ball_y, ball_size, ball_size, 220, 25, 155, 255);
@@ -200,10 +192,7 @@ int main(int argc, char **argv)
 		//left paddle
 		fill_Rectangle(my_own_buffer, screen_width, screen_height, left_paddle_x, left_paddle_y, paddle_w, paddle_h, 255, 255, 255, 255);
 		
-
 		memcpy(your_draw_buffer->pixels, my_own_buffer, sizeof(unsigned char)*screen_width*screen_height * 4);
-
-
 
 		//BLIT BUFFER TO SCREEN
 
