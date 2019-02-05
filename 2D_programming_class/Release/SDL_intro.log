@@ -1,28 +1,24 @@
 ﻿  SDL_Collision_Impulse.cpp
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\sdl_collision_impulse.cpp(59): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\sdl_collision_impulse.cpp(69): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\sdl_collision_impulse.cpp(70): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\sdl_collision_impulse.cpp(71): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\sdl_collision_impulse.cpp(72): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\sdl_collision_impulse.cpp(86): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\sdl_collision_impulse.cpp(87): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\sdl_collision_impulse.cpp(88): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\sdl_collision_impulse.cpp(89): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\sdl_collision_impulse.cpp(154): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\sdl_collision_impulse.cpp(62): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\sdl_collision_impulse.cpp(63): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\sdl_collision_impulse.cpp(64): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\sdl_collision_impulse.cpp(65): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\sdl_collision_impulse.cpp(130): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\sdl_collision_impulse.cpp(131): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\sdl_collision_impulse.cpp(138): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\sdl_collision_impulse.cpp(152): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\sdl_collision_impulse.cpp(153): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
 c:\users\luis\documents\github\2d-game-programming\2d_programming_class\sdl_collision_impulse.cpp(155): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\sdl_collision_impulse.cpp(162): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\sdl_collision_impulse.cpp(176): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\sdl_collision_impulse.cpp(177): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\sdl_collision_impulse.cpp(179): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\sdl_collision_impulse.cpp(180): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\sdl_collision_impulse.cpp(182): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\sdl_collision_impulse.cpp(192): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\sdl_collision_impulse.cpp(193): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\sdl_collision_impulse.cpp(195): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\sdl_collision_impulse.cpp(196): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\sdl_collision_impulse.cpp(265): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\sdl_collision_impulse.cpp(156): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\sdl_collision_impulse.cpp(158): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\sdl_collision_impulse.cpp(168): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\sdl_collision_impulse.cpp(169): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\sdl_collision_impulse.cpp(171): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\sdl_collision_impulse.cpp(172): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\sdl_collision_impulse.cpp(258): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\luis\documents\github\2d-game-programming\2d_programming_class\sdl_collision_impulse.cpp(259): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
   Generating code
-  3 of 3 functions (100.0%) were compiled.
+  1 of 3 functions (33.3%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code

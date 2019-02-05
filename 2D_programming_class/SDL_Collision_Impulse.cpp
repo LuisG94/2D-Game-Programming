@@ -196,9 +196,13 @@ int main(int argc, char **argv)
 
 	float box_force_x = 1;
 	float box_force_y = 1;
-	float box_size = 20;
+	float box_force_x1 = 1;
+	float box_force_y1 = 1;
+	float box_size = 60;
 	float box_x = 200;
+	float box_x1 = 500;
 	float box_y = 100;
+	float box_y1 = 300;
 
 	for (;;)
 	{
@@ -224,8 +228,21 @@ int main(int argc, char **argv)
 			box_force_y *= -1;
 		}
 
+		//box wall collision
+		if (box_x1 <= 0 || box_x1 >= screen_width - box_size)
+		{
+			box_force_x1 *= -1;
+		}
+		if (box_y1 <= 0 || box_y1 >= screen_height - box_size)
+		{
+			box_force_y1 *= -1;
+		}
+
 		box_x += box_force_x;
 		box_y += box_force_y;
+
+		box_x1 += box_force_x1;
+		box_y1 += box_force_y1;
 
 
 		//screen buffer
@@ -237,14 +254,10 @@ int main(int argc, char **argv)
 			my_own_buffer[i * 4 + 3] = 0;//a
 		}
 
-
 		fill_Rectangle(my_own_buffer, screen_width, screen_height, box_x, box_y, box_size, box_size, 255, 255, 0, 255);
-		//fill_Rectangle(my_own_buffer, screen_width, screen_height, box_x, box_y, box_size, box_size, 0, 255, 255, 255);
-
+		fill_Rectangle(my_own_buffer, screen_width, screen_height, box_x1, box_y1, box_size, box_size, 0, 255, 255, 255);
 
 		memcpy(your_draw_buffer->pixels, my_own_buffer, sizeof(unsigned char)*screen_width*screen_height * 4);
-
-
 
 		//BLIT BUFFER TO SCREEN
 
