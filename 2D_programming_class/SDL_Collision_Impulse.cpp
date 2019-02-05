@@ -51,30 +51,6 @@ void fill_Rectangle(unsigned char*buffer, int buffer_width, int buffer_height, i
 
 }
 
-void to_Grayscale(float *dest, unsigned char *src, int w, int h)
-{
-	for (int i = 0; i < screen_width*screen_height; i++)
-	{
-		Pixel *p = (Pixel*)src;
-		dest[i] = (p[i].r + p[i].g + p[i].b)/(255.0*3.0);
-		
-	}
-}
-
-void to_Color(unsigned char *dest, float *src, int w, int h)
-{
-	for (int i = 0; i < screen_width*screen_height; i++)
-	{
-		Pixel *p = (Pixel*)dest;
-		p[i].r = 255.0 * src[i];
-		p[i].g = 255.0 * src[i];
-		p[i].b = 255.0 * src[i];
-		p[i].a = 255.0;
-	}
-}
-
-
-
 int Direction_Collision(float *x, float *y, float *w, float *h, float *x1, float *y1, float *w1, float *h1)
 {
 	int no_collision = 0;
