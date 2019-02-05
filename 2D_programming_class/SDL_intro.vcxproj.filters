@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main_PONG.cpp">
+    <ClCompile Include="SDL_Collision_Impulse.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

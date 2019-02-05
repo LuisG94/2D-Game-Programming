@@ -102,6 +102,127 @@ void draw_Line(unsigned char *dest, int x0, int y0, int x1, int y1, int r, int g
 	}
 }
 
+int Direction_Collision(float *x, float *y, float *w, float *h, float *x1, float *y1, float *w1, float *h1)
+{
+	int no_collision = 0;
+	int top_collision = 1;
+	int right_collision = 2;
+	int bottom_collision = 3;
+	int left_collision = 4;
+
+	float W = 0.5 * (*w + *w1);
+	float H = 0.5 * (*h + *h1);
+	float dx = x - x1 + 0.5*(w - w1);
+	float dy = y - y1 + 0.5*(h - h1);
+
+	if (dx*dx <= W * W && dy*dy <= H * H)
+	{
+		float wy = W * dy;
+		float hx = H * dx;
+
+		if (wy > hx)
+		{
+			if (wy + hx > 0)
+			{
+				return bottom_collision;
+			}
+			else 
+				return left_collision;
+		}
+		else
+		{
+			if (wy + hx > 0)
+			{
+				return right_collision;
+			}
+			else
+				return top_collision;
+		}
+	}
+	return no_collision;
+}
+
+void Impulse_Collision(float *x, float *y, float *w, float *h, float *Xvec, float *Yvec, float mass_a, float *x1, float *y1, float *w1, float *h1, float *Xvec1, float *Yvec1, float mass_b)
+{
+	float normal_x;
+	float normal_y;
+
+	int k = Direction_Collision(x, y, w, h, x1, y1, w1, h1);
+
+	if (k == 1)
+	{
+		normal_x = 0;
+		normal_y = -1;
+	}
+	else if (k == 2)
+	{
+		normal_x = 1;
+		normal_y = 0;
+	}
+	else if (k == 3)
+	{
+		normal_x = 0;
+		normal_y = 1;
+	}
+	else if (k == 4)
+	{
+		normal_x = -1;
+		normal_y = 0;
+	}
+	else
+	{
+		normal_x = 0;
+		normal_y = 0;
+	}
+
+	float relative_velocity_x = *Xvec1;
+	float relative_velocity_y = *Yvec1;
+
+	float subtract_x = (&relative_velocity_x - Xvec);
+	float subtract_y = (&relative_velocity_y - Yvec);
+
+	float dot = (relative_velocity_x * normal_x) + (relative_velocity_y * normal_y);
+
+	if (dot < 0) return;
+
+	float bounce = 1.0; //1.0 bounce, 0.0 mud
+	float mass = -(1.0 + bounce) * dot / (mass_a + mass_b);
+
+	float impulse_a_x = normal_x;
+	float impulse_a_y = normal_y;
+
+	impulse_a_x *= mass * mass_a;//scaling
+	impulse_a_y *= mass * mass_a;
+
+	float impulse_b_x = normal_x;
+	float impulse_b_y = normal_y;
+
+	impulse_b_x *= mass * mass_b;//scaling
+	impulse_b_y *= mass * mass_b;
+
+	float sub_x = (Xvec - &impulse_a_x);
+	float sub_y = (Yvec - &impulse_a_y);
+
+	float add_x = (Xvec1 - &impulse_b_x);
+	float add_y = (Yvec1 - &impulse_b_y);
+
+	float mt = 1.0 / (mass_a + mass_b);
+
+	float tangent_x = normal_y;
+	float tangent_y = -normal_x;
+
+	float tangent_dot = (relative_velocity_x * tangent_x) + (relative_velocity_y * tangent_y);
+
+	tangent_x *= -tangent_dot * mt;
+	tangent_y *= -tangent_dot * mt;
+
+	float sub_x_1 = (Xvec - &tangent_x);
+	float sub_y_1 = (Yvec - &tangent_y);
+
+	float add_x_1 = (Xvec1 - &tangent_x);
+	float add_y_1 = (Yvec1 - &tangent_y);
+}
+
 int main(int argc, char **argv)
 {
 	SDL_Init(SDL_INIT_VIDEO);
@@ -149,18 +270,21 @@ int main(int argc, char **argv)
 			my_own_buffer[i * 4 + 3] = 0;
 		}
 
-		for (int i = 0; i < 100; i++)
+		/*for (int i = 0; i < 100; i++)
 		{
 			int ran1 = rand() % screen_width;
 			int ran2 = rand() % screen_height;
 			fill_Rectangle(my_own_buffer, screen_width, screen_height, 50*(rand() % 10), 50 * (rand() % 10), 100, 100, rand() % 255, rand() % 255, rand() % 255, 255);
-		}
+		}*/
+
+		fill_Rectangle(my_own_buffer, screen_width, screen_height, 25, 50, 60, 60, 255, 255, 255, 255);
+		fill_Rectangle(my_own_buffer, screen_width, screen_height, 220, 50, 60, 60, 255, 255, 255, 255);
 		
 		//to_Grayscale(dat, my_own_buffer, screen_width, screen_height);
 
 		//to_Color(my_own_buffer, dat, screen_width, screen_height);
 
-		draw_Line(my_own_buffer, 200, 25, 150, 25, 255, 255, 255, 255);
+		//draw_Line(my_own_buffer, 200, 25, 150, 25, 255, 255, 255, 255);
 
 		memcpy(your_draw_buffer->pixels, my_own_buffer, sizeof(unsigned char)*screen_width*screen_height * 4);
 
