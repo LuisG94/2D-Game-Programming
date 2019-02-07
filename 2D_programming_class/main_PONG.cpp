@@ -48,24 +48,6 @@ void fill_Rectangle(unsigned char*buffer, int buffer_width, int buffer_height, i
 
 }
 
-void draw_Line(unsigned char *dest, int x0, int y0, int x1, int y1, int r, int g, int b, int a)
-{
-	int dx = x1 - x0;
-	int dy = y1 - y0;
-	//if (x0 == x1)
-	//{
-	//	for ()
-	//	{
-
-	//	}
-	//}
-	for (int x = 0; x < dx; x++)
-	{
-		int y = y0 + dy * (x - x0) / dx;
-		set_Pixel_Alternative(dest, screen_width, x, y, r, g, b, a);
-	}
-}
-
 int main(int argc, char **argv)
 {
 	SDL_Init(SDL_INIT_VIDEO);

@@ -1,25 +1,19 @@
 //include SDL header
 #include "SDL2-2.0.8\include\SDL.h"
-#include "SDL2-2.0.8\include\SDL_image.h"
 
 //load libraries
 #pragma comment(lib,"SDL2-2.0.8\\lib\\x86\\SDL2.lib")
 #pragma comment(lib,"SDL2-2.0.8\\lib\\x86\\SDL2main.lib")
-#pragma comment(lib,"SDL2-2.0.8\\lib\\x86\\SDL2_image.lib")
 
 #pragma comment(linker,"/subsystem:console")
 #include <iostream>
 #include <assert.h>
 using namespace std;
 
-
-
 SDL_Renderer *renderer = NULL;
 int screen_width = 800;
 int screen_height = 600;
 
-unsigned char prev_key_state[256];
-unsigned char *keys = NULL;
 SDL_Window *window = NULL;
 
 
@@ -28,6 +22,7 @@ struct Pixel
 {
 	unsigned char r, g, b, a;
 };
+
 void set_Pixel_Alternative(unsigned char* buffer, int width, int x, int y, int r, int g, int b, int a)
 {
 	Pixel *p = (Pixel*)buffer;
@@ -51,7 +46,7 @@ void fill_Rectangle(unsigned char*buffer, int buffer_width, int buffer_height, i
 
 }
 
-int Direction_Collision(float *x, float *y, float *w, float *h, float *x1, float *y1, float *w1, float *h1)
+int direction_Collision(float *x, float *y, float *w, float *h, float *x1, float *y1, float *w1, float *h1)
 {
 	int no_collision = 0;
 	int top_collision = 1;
@@ -91,12 +86,12 @@ int Direction_Collision(float *x, float *y, float *w, float *h, float *x1, float
 	return no_collision;
 }
 
-void Impulse_Collision(float *x, float *y, float *w, float *h, float *Xvec, float *Yvec, float mass_a, float *x1, float *y1, float *w1, float *h1, float *Xvec1, float *Yvec1, float mass_b)
+void impulse_Collision(float *x, float *y, float *w, float *h, float *Xvec, float *Yvec, float mass_a, float *x1, float *y1, float *w1, float *h1, float *Xvec1, float *Yvec1, float mass_b)
 {
 	float normal_x;
 	float normal_y;
 
-	int k = Direction_Collision(x, y, w, h, x1, y1, w1, h1);
+	int k = direction_Collision(x, y, w, h, x1, y1, w1, h1);
 
 	if (k == 1)
 	{
@@ -176,9 +171,6 @@ int main(int argc, char **argv)
 {
 	SDL_Init(SDL_INIT_VIDEO);
 
-	prev_key_state[256];
-	keys = (unsigned char*)SDL_GetKeyboardState(NULL);
-
 	window = SDL_CreateWindow(
 		"POWEERRRRRR",
 		SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
@@ -190,7 +182,7 @@ int main(int argc, char **argv)
 	SDL_Surface *your_draw_buffer = SDL_CreateRGBSurfaceWithFormat(0, screen_width, screen_height, 32, SDL_PIXELFORMAT_RGBA32);
 	SDL_Surface *screen = SDL_GetWindowSurface(window);
 	SDL_SetSurfaceBlendMode(your_draw_buffer, SDL_BLENDMODE_NONE);
-	float *dat = new float[screen_width * screen_height];
+	float *data = new float[screen_width * screen_height];
 
 	unsigned char *my_own_buffer = (unsigned char*)malloc(sizeof(unsigned char)*screen_width*screen_height * 4);
 
@@ -202,11 +194,22 @@ int main(int argc, char **argv)
 	float box_x = 200;
 	float box_x1 = 500;
 	float box_y = 100;
-	float box_y1 = 300;
+	float box_y1 = 100;
+	float Xvelocity = 12;
+	float Yvelocity = 12;
+	float Xvelocity2 = 11;
+	float Yvelocity2 = 11;
+	float box_mass1 = 200;
+	float box_mass2 = 200;
+	float wall_edges = 10;
+
+	int max_boxes = 2;
+
+	int bounce = 0;//counter for number of bounces
+	int bounce1 = 0;//counter for number of bounces
 
 	for (;;)
 	{
-		memcpy(prev_key_state, keys, 256);
 
 		//consume all window events first
 		SDL_Event event;
@@ -219,30 +222,38 @@ int main(int argc, char **argv)
 		}
 
 		//box wall collision
-		if (box_x <= 0 || box_x >= screen_width - box_size)
+		if (box_x <= wall_edges || box_x >= screen_width - (box_size + wall_edges))
 		{
 			box_force_x *= -1;
+			bounce++;
+			printf("Number of bounces box1: %d\n", bounce);
 		}
-		if (box_y <= 0 || box_y >= screen_height - box_size)
+		if (box_y <= wall_edges || box_y >= screen_height - (box_size + wall_edges))
 		{
 			box_force_y *= -1;
+			bounce++;
+			printf("Number of bounces box1: %d\n", bounce);
 		}
 
 		//box wall collision
-		if (box_x1 <= 0 || box_x1 >= screen_width - box_size)
+		if (box_x1 <= wall_edges || box_x1 >= screen_width - (box_size + wall_edges))
 		{
 			box_force_x1 *= -1;
+			bounce1++;
+			//printf("Number of bounces box2: %d\n", bounce1);
 		}
-		if (box_y1 <= 0 || box_y1 >= screen_height - box_size)
+		if (box_y1 <= wall_edges || box_y1 >= screen_height - (box_size + wall_edges))
 		{
 			box_force_y1 *= -1;
+			bounce1++;
+			//printf("Number of bounces box2: %d\n", bounce1);
 		}
 
 		box_x += box_force_x;
-		box_y += box_force_y;
+		//box_y += box_force_y;
 
-		box_x1 += box_force_x1;
-		box_y1 += box_force_y1;
+		box_x1 -= box_force_x1;
+		//box_y1 += box_force_y1;
 
 
 		//screen buffer
@@ -254,8 +265,22 @@ int main(int argc, char **argv)
 			my_own_buffer[i * 4 + 3] = 0;//a
 		}
 
+		//Top Wall
+		fill_Rectangle(my_own_buffer, screen_width, screen_height, 0, 0, screen_width, 10, 255, 0, 0, 255);
+		//Left Wall
+		fill_Rectangle(my_own_buffer, screen_width, screen_height, 0, 0, 10, screen_height, 255, 0, 0, 255);
+		//Bottom Wall
+		fill_Rectangle(my_own_buffer, screen_width, screen_height, 0, screen_height - 10, screen_width, 10, 255, 0, 0, 255);
+		//Right Wall
+		fill_Rectangle(my_own_buffer, screen_width, screen_height, screen_width - 10, 0, 10, screen_height, 255, 0, 0, 255);
+		
+		//boxes
 		fill_Rectangle(my_own_buffer, screen_width, screen_height, box_x, box_y, box_size, box_size, 255, 255, 0, 255);
-		fill_Rectangle(my_own_buffer, screen_width, screen_height, box_x1, box_y1, box_size, box_size, 0, 255, 255, 255);
+		fill_Rectangle(my_own_buffer, screen_width, screen_height, box_x1, box_y1, box_size, box_size, 255, 0, 0, 255);
+		
+		//box collisions
+		impulse_Collision(&box_x, &box_y, &box_size, &box_size, &Xvelocity, &Yvelocity, box_mass1, &box_x1, &box_y1, &box_size, &box_size, &Xvelocity2, &Yvelocity2, box_mass2);
+		//impulse_Collision(&box_x1, &box_y1, &box_size, &box_size, &Xvelocity2, &Yvelocity2, box_mass2, &box_x, &box_y, &box_size, &box_size, &Xvelocity, &Yvelocity, box_mass1);
 
 		memcpy(your_draw_buffer->pixels, my_own_buffer, sizeof(unsigned char)*screen_width*screen_height * 4);
 
