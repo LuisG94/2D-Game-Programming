@@ -46,7 +46,7 @@ void fill_Rectangle(unsigned char*buffer, int buffer_width, int buffer_height, i
 
 }
 
-int direction_Collision(float *x, float *y, float *w, float *h, float *x1, float *y1, float *w1, float *h1)
+int direction_Collision(float x, float y, float w, float h, float x1, float y1, float w1, float h1)
 {
 	int no_collision = 0;
 	int top_collision = 1;
@@ -54,8 +54,8 @@ int direction_Collision(float *x, float *y, float *w, float *h, float *x1, float
 	int bottom_collision = 3;
 	int left_collision = 4;
 
-	float W = 0.5 * (*w + *w1);
-	float H = 0.5 * (*h + *h1);
+	float W = 0.5 * (w + w1);
+	float H = 0.5 * (h + h1);
 	float dx = x - x1 + 0.5*(w - w1);
 	float dy = y - y1 + 0.5*(h - h1);
 
@@ -86,7 +86,7 @@ int direction_Collision(float *x, float *y, float *w, float *h, float *x1, float
 	return no_collision;
 }
 
-void impulse_Collision(float *x, float *y, float *w, float *h, float *Xvec, float *Yvec, float mass_a, float *x1, float *y1, float *w1, float *h1, float *Xvec1, float *Yvec1, float mass_b)
+void impulse_Collision(float x, float y, float w, float h, float *Xvec, float *Yvec, float mass_a, float x1, float y1, float w1, float h1, float *Xvec1, float *Yvec1, float mass_b)
 {
 	float normal_x;
 	float normal_y;
@@ -249,11 +249,11 @@ int main(int argc, char **argv)
 			//printf("Number of bounces box2: %d\n", bounce1);
 		}
 
-		box_x += box_force_x;
-		//box_y += box_force_y;
+		box_x += Xvelocity;
+		box_y += Yvelocity;
 
-		box_x1 -= box_force_x1;
-		//box_y1 += box_force_y1;
+		box_x1 -= Xvelocity2;
+		box_y1 += Yvelocity2;
 
 
 		//screen buffer
@@ -279,7 +279,7 @@ int main(int argc, char **argv)
 		fill_Rectangle(my_own_buffer, screen_width, screen_height, box_x1, box_y1, box_size, box_size, 255, 0, 0, 255);
 		
 		//box collisions
-		impulse_Collision(&box_x, &box_y, &box_size, &box_size, &Xvelocity, &Yvelocity, box_mass1, &box_x1, &box_y1, &box_size, &box_size, &Xvelocity2, &Yvelocity2, box_mass2);
+		impulse_Collision(box_x, box_y, box_size, box_size, &Xvelocity, &Yvelocity, box_mass1, box_x1, box_y1, box_size, box_size, &Xvelocity2, &Yvelocity2, box_mass2);
 		//impulse_Collision(&box_x1, &box_y1, &box_size, &box_size, &Xvelocity2, &Yvelocity2, box_mass2, &box_x, &box_y, &box_size, &box_size, &Xvelocity, &Yvelocity, box_mass1);
 
 		memcpy(your_draw_buffer->pixels, my_own_buffer, sizeof(unsigned char)*screen_width*screen_height * 4);
