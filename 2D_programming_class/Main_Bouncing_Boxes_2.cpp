@@ -233,25 +233,20 @@ int main(int argc, char **argv)
 
 	float box_size = 60;
 	float box_x = 200;
-	float box_x1 = 500;
 	float box_y = 100;
-	float box_y1 = 100;
-	float Xvelocity = 1.2;
-	float Yvelocity = 0.1;
-	float Xvelocity2 = -1.2;
-	float Yvelocity2 = 0.1;
+	float Xvelocity = 1.0 - 2.0 * rand() / RAND_MAX;
+	float Yvelocity = 1.0 - 2.0 * rand() / RAND_MAX;
 	float box_mass1 = 1;
-	float box_mass2 = 1;
 	float wall_edges = 10;
+	int num_of_walls = 4;
+	int max_boxes = 3;
 
-	int max_boxes = 2;
-
+	int *walls = (int*)malloc(sizeof(int)* num_of_walls);
+	int *boxes = (int*)malloc(sizeof(int)* max_boxes);
 	int bounce = 0;//counter for number of bounces
-	int bounce1 = 0;//counter for number of bounces
 
 	for (;;)
 	{
-
 		//consume all window events first
 		SDL_Event event;
 		while (SDL_PollEvent(&event))
@@ -262,41 +257,6 @@ int main(int argc, char **argv)
 			}
 		}
 
-		////box wall collision
-		//if (box_x <= wall_edges || box_x >= screen_width - (box_size + wall_edges))
-		//{
-		//	box_force_x *= -1;
-		//	bounce++;
-		//	printf("Number of bounces box1: %d\n", bounce);
-		//}
-		//if (box_y <= wall_edges || box_y >= screen_height - (box_size + wall_edges))
-		//{
-		//	box_force_y *= -1;
-		//	bounce++;
-		//	printf("Number of bounces box1: %d\n", bounce);
-		//}
-
-		////box wall collision
-		//if (box_x1 <= wall_edges || box_x1 >= screen_width - (box_size + wall_edges))
-		//{
-		//	box_force_x1 *= -1;
-		//	bounce1++;
-		//	//printf("Number of bounces box2: %d\n", bounce1);
-		//}
-		//if (box_y1 <= wall_edges || box_y1 >= screen_height - (box_size + wall_edges))
-		//{
-		//	box_force_y1 *= -1;
-		//	bounce1++;
-		//	//printf("Number of bounces box2: %d\n", bounce1);
-		//}
-
-		box_x += Xvelocity;
-		box_y += Yvelocity;
-
-		box_x1 += Xvelocity2;
-		box_y1 += Yvelocity2;
-
-
 		//screen buffer
 		for (int i = 0; i < screen_width*screen_height; i++)
 		{
@@ -306,35 +266,31 @@ int main(int argc, char **argv)
 			my_own_buffer[i * 4 + 3] = 0;//a
 		}
 
+		
+
 		//Top Wall
 		fill_Rectangle(my_own_buffer, screen_width, screen_height, 0, 0, screen_width, 10, 255, 0, 0, 255);
-		//impulse_Immovable_Object(box_x, box_y, box_size, box_size, &Xvelocity, &Yvelocity, 0.1, 0, 0, screen_width, 10);
+		impulse_Immovable_Object(box_x, box_y, box_size, box_size, &Xvelocity, &Yvelocity, box_mass1, 0, 0, screen_width, 10);
 		//Left Wall
 		fill_Rectangle(my_own_buffer, screen_width, screen_height, 0, 0, 10, screen_height, 255, 0, 0, 255);
-		//impulse_Immovable_Object(box_x, box_y, box_size, box_size, &Xvelocity, &Yvelocity, 0.1, 0, 0, screen_width, 10);
+		impulse_Immovable_Object(box_x, box_y, box_size, box_size, &Xvelocity, &Yvelocity, box_mass1, 0, 0, screen_height, 10);
 		//Bottom Wall
 		fill_Rectangle(my_own_buffer, screen_width, screen_height, 0, screen_height - 10, screen_width, 10, 255, 0, 0, 255);
-		impulse_Immovable_Object();
+		impulse_Immovable_Object(box_x, box_y, box_size, box_size, &Xvelocity, &Yvelocity, box_mass1, 0, screen_height-10, screen_width, 10);
 		//Right Wall
 		fill_Rectangle(my_own_buffer, screen_width, screen_height, screen_width - 10, 0, 10, screen_height, 255, 0, 0, 255);
-		impulse_Immovable_Object();
+		impulse_Immovable_Object(box_x, box_y, box_size, box_size, &Xvelocity, &Yvelocity, box_mass1, -10, 0, 10, screen_height);
 
-		//boxes
-
-		for (int i = 0; i < max_boxes; i++)
+		for (int i = 0; i < *boxes; i++)
 		{
-			for (int j = i + 1; j < max_boxes; j++)
-			{
-				fill_Rectangle(my_own_buffer, screen_width, screen_height, box_x, box_y, box_size, box_size, 255, 255, 0, 255);
-			}
+			fill_Rectangle(my_own_buffer, screen_width, screen_height, box_x, box_y, box_size, box_size, 255, 255, 0, 255);
+			impulse_Collision(box_x, box_y, box_size, box_size, &Xvelocity, &Yvelocity, box_mass1, box_x, box_y, box_size, box_size, &Xvelocity, &Yvelocity, box_mass1);
+
 		}
 		
 		//fill_Rectangle(my_own_buffer, screen_width, screen_height, box_x1, box_y1, box_size, box_size, 255, 0, 0, 255);
-
-		//box collisions
-		impulse_Collision(box_x, box_y, box_size, box_size, &Xvelocity, &Yvelocity, box_mass1, box_x1, box_y1, box_size, box_size, &Xvelocity2, &Yvelocity2, box_mass2);
-		//impulse_Collision(&box_x1, &box_y1, &box_size, &box_size, &Xvelocity2, &Yvelocity2, box_mass2, &box_x, &box_y, &box_size, &box_size, &Xvelocity, &Yvelocity, box_mass1);
-
+		
+		
 		memcpy(your_draw_buffer->pixels, my_own_buffer, sizeof(unsigned char)*screen_width*screen_height * 4);
 
 		//BLIT BUFFER TO SCREEN
