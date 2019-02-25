@@ -23,6 +23,12 @@ struct Pixel
 	unsigned char r, g, b, a;
 };
 
+struct Boxes
+{
+	float x, y, w, h, xvel, yvel;
+	unsigned char r, g, b, a;
+};
+
 void set_Pixel_Alternative(unsigned char* buffer, int width, int x, int y, int r, int g, int b, int a)
 {
 	Pixel *p = (Pixel*)buffer;
@@ -119,11 +125,8 @@ void impulse_Collision(float x, float y, float w, float h, float *Xvec, float *Y
 		normal_y = 0;
 	}
 
-	float relative_velocity_x = *Xvec1;
-	float relative_velocity_y = *Yvec1;
-
-	float subtract_x = (&relative_velocity_x - Xvec);
-	float subtract_y = (&relative_velocity_y - Yvec);
+	float relative_velocity_x = *Xvec1 - *Xvec;
+	float relative_velocity_y = *Yvec1 - *Yvec;
 
 	float dot = (relative_velocity_x * normal_x) + (relative_velocity_y * normal_y);
 
@@ -132,23 +135,17 @@ void impulse_Collision(float x, float y, float w, float h, float *Xvec, float *Y
 	float bounce = 1.0; //1.0 bounce, 0.0 mud
 	float mass = -(1.0 + bounce) * dot / (mass_a + mass_b);
 
-	float impulse_a_x = normal_x;
-	float impulse_a_y = normal_y;
+	float impulse_a_x = normal_x * mass * mass_a;
+	float impulse_a_y = normal_y * mass * mass_a;
 
-	impulse_a_x *= mass * mass_a;//scaling
-	impulse_a_y *= mass * mass_a;
+	float impulse_b_x = normal_x * mass * mass_b;
+	float impulse_b_y = normal_y * mass * mass_b;
 
-	float impulse_b_x = normal_x;
-	float impulse_b_y = normal_y;
+	*Xvec -= impulse_a_x;
+	*Yvec -= impulse_a_y;
 
-	impulse_b_x *= mass * mass_b;//scaling
-	impulse_b_y *= mass * mass_b;
-
-	float sub_x = (Xvec - &impulse_a_x);
-	float sub_y = (Yvec - &impulse_a_y);
-
-	float add_x = (Xvec1 - &impulse_b_x);
-	float add_y = (Yvec1 - &impulse_b_y);
+	*Xvec1 += impulse_b_x;
+	*Yvec1 += impulse_b_y;
 
 	float mt = 1.0 / (mass_a + mass_b);
 
@@ -157,14 +154,68 @@ void impulse_Collision(float x, float y, float w, float h, float *Xvec, float *Y
 
 	float tangent_dot = (relative_velocity_x * tangent_x) + (relative_velocity_y * tangent_y);
 
-	tangent_x *= -tangent_dot * mt;
-	tangent_y *= -tangent_dot * mt;
+	tangent_x = tangent_x * -tangent_dot * mt;
+	tangent_y = tangent_y * -tangent_dot * mt;
 
-	float sub_x_1 = (Xvec - &tangent_x);
-	float sub_y_1 = (Yvec - &tangent_y);
+	*Xvec -= tangent_x;
+	*Yvec -= tangent_y;
 
-	float add_x_1 = (Xvec1 - &tangent_x);
-	float add_y_1 = (Yvec1 - &tangent_y);
+	*Xvec1 += tangent_x;
+	*Yvec1 += tangent_y;
+}
+
+void impulse_Immovable_Object(float x, float y, float w, float h, float *Xvec, float *Yvec, float mass_a, float x1, float y1, float w1, float h1)
+{
+	float normal_x;
+	float normal_y;
+
+	int k = direction_Collision(x, y, w, h, x1, y1, w1, h1);
+
+	if (k == 1)
+	{
+		normal_x = 0;
+		normal_y = -1;
+	}
+	else if (k == 2)
+	{
+		normal_x = 1;
+		normal_y = 0;
+	}
+	else if (k == 3)
+	{
+		normal_x = 0;
+		normal_y = 1;
+	}
+	else if (k == 4)
+	{
+		normal_x = -1;
+		normal_y = 0;
+	}
+	else
+	{
+		normal_x = 0;
+		normal_y = 0;
+	}
+
+	x = -*Xvec;
+	y = -*Yvec;
+
+	float dot = (x * normal_x) + (y * normal_y);
+
+	if (dot < 0) return;
+
+	float e = 1.0;
+	float j = -(1.0 + e) * dot / (mass_a);
+
+	float impulse_x = normal_x;
+	float impulse_y = normal_y;
+
+	impulse_x = impulse_x * j;
+	impulse_y = impulse_y * j;
+
+	*Xvec -= impulse_x;
+	*Yvec -= impulse_y;
+
 }
 
 int main(int argc, char **argv)
@@ -185,28 +236,26 @@ int main(int argc, char **argv)
 	float *data = new float[screen_width * screen_height];
 
 	unsigned char *my_own_buffer = (unsigned char*)malloc(sizeof(unsigned char)*screen_width*screen_height * 4);
+	
+	int box_size = 8;
 
-	float box_force_x = 1;
-	float box_force_y = 1;
-	float box_force_x1 = 1;
-	float box_force_y1 = 1;
-	float box_size = 60;
-	float box_x = 200;
-	float box_x1 = 500;
-	float box_y = 100;
-	float box_y1 = 100;
-	float Xvelocity = 12;
-	float Yvelocity = 12;
-	float Xvelocity2 = 11;
-	float Yvelocity2 = 11;
-	float box_mass1 = 200;
-	float box_mass2 = 200;
-	float wall_edges = 10;
+	const int max_boxes = 100;
 
-	int max_boxes = 2;
+	Boxes *boxes = (Boxes*)malloc(sizeof(Boxes)*max_boxes);
 
-	int bounce = 0;//counter for number of bounces
-	int bounce1 = 0;//counter for number of bounces
+	for (int i = 0; i < max_boxes; i++)
+	{
+		boxes[i].x = screen_width / 2;
+		boxes[i].y = screen_height / 2;
+		boxes[i].w = box_size;
+		boxes[i].h = box_size;
+		boxes[i].xvel = 1 - 2.0 * rand() / RAND_MAX;
+		boxes[i].yvel = 1 - 2.0 * rand() / RAND_MAX;
+		boxes[i].r = rand() % 255;
+		boxes[i].g = rand() % 255;
+		boxes[i].b = rand() % 255;
+		boxes[i].a = 255;
+	}
 
 	for (;;)
 	{
@@ -221,40 +270,6 @@ int main(int argc, char **argv)
 			}
 		}
 
-		//box wall collision
-		if (box_x <= wall_edges || box_x >= screen_width - (box_size + wall_edges))
-		{
-			box_force_x *= -1;
-			bounce++;
-			printf("Number of bounces box1: %d\n", bounce);
-		}
-		if (box_y <= wall_edges || box_y >= screen_height - (box_size + wall_edges))
-		{
-			box_force_y *= -1;
-			bounce++;
-			printf("Number of bounces box1: %d\n", bounce);
-		}
-
-		//box wall collision
-		if (box_x1 <= wall_edges || box_x1 >= screen_width - (box_size + wall_edges))
-		{
-			box_force_x1 *= -1;
-			bounce1++;
-			//printf("Number of bounces box2: %d\n", bounce1);
-		}
-		if (box_y1 <= wall_edges || box_y1 >= screen_height - (box_size + wall_edges))
-		{
-			box_force_y1 *= -1;
-			bounce1++;
-			//printf("Number of bounces box2: %d\n", bounce1);
-		}
-
-		box_x += Xvelocity;
-		box_y += Yvelocity;
-
-		box_x1 -= Xvelocity2;
-		box_y1 += Yvelocity2;
-
 
 		//screen buffer
 		for (int i = 0; i < screen_width*screen_height; i++)
@@ -264,23 +279,36 @@ int main(int argc, char **argv)
 			my_own_buffer[i * 4 + 2] = 0;//b
 			my_own_buffer[i * 4 + 3] = 0;//a
 		}
+			
+			for (int i = 0; i < max_boxes; i++)
+			{
+				for (int j = i + 1; j < max_boxes; j++)
+				{
+					impulse_Collision(boxes[i].x, boxes[i].y, boxes[i].w, boxes[i].h, &boxes[i].xvel, &boxes[i].yvel, 1, boxes[j].x, boxes[j].y, boxes[j].w, boxes[j].h, &boxes[j].xvel, &boxes[j].yvel, 1);
+				}
+				//Top Wall
+				fill_Rectangle(my_own_buffer, screen_width, screen_height, 0, 0, screen_width - 10, 10, 255, 0, 0, 255);
+				impulse_Immovable_Object(boxes[i].x, boxes[i].y, boxes[i].w, boxes[i].h, &boxes[i].xvel, &boxes[i].yvel, 1, 0, 0, screen_width, 10);
+				//Left Wall
+				fill_Rectangle(my_own_buffer, screen_width, screen_height, 0, 0, 10, screen_height, 255, 0, 0, 255);
+				impulse_Immovable_Object(boxes[i].x, boxes[i].y, boxes[i].w, boxes[i].h, &boxes[i].xvel, &boxes[i].yvel, 1, 0, 0, 10, screen_height);
+				//Bottom Wall
+				fill_Rectangle(my_own_buffer, screen_width, screen_height, 0, screen_height - 10, screen_width, 10, 255, 0, 0, 255);
+				impulse_Immovable_Object(boxes[i].x, boxes[i].y, boxes[i].w, boxes[i].h, &boxes[i].xvel, &boxes[i].yvel, 1, 0, screen_height - 10, screen_width, 10);
+				//Right Wall
+				fill_Rectangle(my_own_buffer, screen_width, screen_height, screen_width - 10, 0, 10, screen_height, 255, 0, 0, 255);
+				impulse_Immovable_Object(boxes[i].x, boxes[i].y, boxes[i].w, boxes[i].h, &boxes[i].xvel, &boxes[i].yvel, 1, screen_width - 10, 0, 10, screen_height);
+			
 
-		//Top Wall
-		fill_Rectangle(my_own_buffer, screen_width, screen_height, 0, 0, screen_width, 10, 255, 0, 0, 255);
-		//Left Wall
-		fill_Rectangle(my_own_buffer, screen_width, screen_height, 0, 0, 10, screen_height, 255, 0, 0, 255);
-		//Bottom Wall
-		fill_Rectangle(my_own_buffer, screen_width, screen_height, 0, screen_height - 10, screen_width, 10, 255, 0, 0, 255);
-		//Right Wall
-		fill_Rectangle(my_own_buffer, screen_width, screen_height, screen_width - 10, 0, 10, screen_height, 255, 0, 0, 255);
-		
-		//boxes
-		fill_Rectangle(my_own_buffer, screen_width, screen_height, box_x, box_y, box_size, box_size, 255, 255, 0, 255);
-		fill_Rectangle(my_own_buffer, screen_width, screen_height, box_x1, box_y1, box_size, box_size, 255, 0, 0, 255);
-		
-		//box collisions
-		impulse_Collision(box_x, box_y, box_size, box_size, &Xvelocity, &Yvelocity, box_mass1, box_x1, box_y1, box_size, box_size, &Xvelocity2, &Yvelocity2, box_mass2);
-		//impulse_Collision(&box_x1, &box_y1, &box_size, &box_size, &Xvelocity2, &Yvelocity2, box_mass2, &box_x, &box_y, &box_size, &box_size, &Xvelocity, &Yvelocity, box_mass1);
+				boxes[i].x += boxes[i].xvel;
+				boxes[i].y += boxes[i].yvel;
+				
+			}
+
+		for (int i = 0; i < max_boxes; i++)
+		{
+			fill_Rectangle(my_own_buffer, screen_width, screen_height, boxes[i].x, boxes[i].y, boxes[i].w, boxes[i].h, boxes[i].r, boxes[i].g, boxes[i].b, boxes[i].a);
+		}
 
 		memcpy(your_draw_buffer->pixels, my_own_buffer, sizeof(unsigned char)*screen_width*screen_height * 4);
 
