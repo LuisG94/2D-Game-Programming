@@ -239,14 +239,14 @@ int main(int argc, char **argv)
 	
 	int box_size = 8;
 
-	const int max_boxes = 100;
+	const int max_boxes = 150;
 
 	Boxes *boxes = (Boxes*)malloc(sizeof(Boxes)*max_boxes);
 
 	for (int i = 0; i < max_boxes; i++)
 	{
-		boxes[i].x = screen_width / 2;
-		boxes[i].y = screen_height / 2;
+		boxes[i].x = rand() % 740 + 30;
+		boxes[i].y = rand() % 540 + 30;
 		boxes[i].w = box_size;
 		boxes[i].h = box_size;
 		boxes[i].xvel = 1 - 2.0 * rand() / RAND_MAX;
@@ -280,30 +280,30 @@ int main(int argc, char **argv)
 			my_own_buffer[i * 4 + 3] = 0;//a
 		}
 			
-			for (int i = 0; i < max_boxes; i++)
+		for (int i = 0; i < max_boxes; i++)
+		{
+			for (int j = i + 1; j < max_boxes; j++)
 			{
-				for (int j = i + 1; j < max_boxes; j++)
-				{
-					impulse_Collision(boxes[i].x, boxes[i].y, boxes[i].w, boxes[i].h, &boxes[i].xvel, &boxes[i].yvel, 1, boxes[j].x, boxes[j].y, boxes[j].w, boxes[j].h, &boxes[j].xvel, &boxes[j].yvel, 1);
-				}
-				//Top Wall
-				fill_Rectangle(my_own_buffer, screen_width, screen_height, 0, 0, screen_width - 10, 10, 255, 0, 0, 255);
-				impulse_Immovable_Object(boxes[i].x, boxes[i].y, boxes[i].w, boxes[i].h, &boxes[i].xvel, &boxes[i].yvel, 1, 0, 0, screen_width, 10);
-				//Left Wall
-				fill_Rectangle(my_own_buffer, screen_width, screen_height, 0, 0, 10, screen_height, 255, 0, 0, 255);
-				impulse_Immovable_Object(boxes[i].x, boxes[i].y, boxes[i].w, boxes[i].h, &boxes[i].xvel, &boxes[i].yvel, 1, 0, 0, 10, screen_height);
-				//Bottom Wall
-				fill_Rectangle(my_own_buffer, screen_width, screen_height, 0, screen_height - 10, screen_width, 10, 255, 0, 0, 255);
-				impulse_Immovable_Object(boxes[i].x, boxes[i].y, boxes[i].w, boxes[i].h, &boxes[i].xvel, &boxes[i].yvel, 1, 0, screen_height - 10, screen_width, 10);
-				//Right Wall
-				fill_Rectangle(my_own_buffer, screen_width, screen_height, screen_width - 10, 0, 10, screen_height, 255, 0, 0, 255);
-				impulse_Immovable_Object(boxes[i].x, boxes[i].y, boxes[i].w, boxes[i].h, &boxes[i].xvel, &boxes[i].yvel, 1, screen_width - 10, 0, 10, screen_height);
-			
-
-				boxes[i].x += boxes[i].xvel;
-				boxes[i].y += boxes[i].yvel;
-				
+				impulse_Collision(boxes[i].x, boxes[i].y, boxes[i].w, boxes[i].h, &boxes[i].xvel, &boxes[i].yvel, 1, boxes[j].x, boxes[j].y, boxes[j].w, boxes[j].h, &boxes[j].xvel, &boxes[j].yvel, 1);
 			}
+
+			//Top Wall
+			fill_Rectangle(my_own_buffer, screen_width, screen_height, 0, 0, screen_width - 20, 20, 255, 0, 0, 255);
+			impulse_Immovable_Object(boxes[i].x, boxes[i].y, boxes[i].w, boxes[i].h, &boxes[i].xvel, &boxes[i].yvel, 1, 0, 0, screen_width, 20);
+			//Left Wall
+			fill_Rectangle(my_own_buffer, screen_width, screen_height, 0, 0, 20, screen_height, 255, 0, 0, 255);
+			impulse_Immovable_Object(boxes[i].x, boxes[i].y, boxes[i].w, boxes[i].h, &boxes[i].xvel, &boxes[i].yvel, 1, 0, 0, 20, screen_height);
+			//Bottom Wall
+			fill_Rectangle(my_own_buffer, screen_width, screen_height, 20, screen_height - 20, screen_width - 20, 20, 255, 0, 0, 255);
+			impulse_Immovable_Object(boxes[i].x, boxes[i].y, boxes[i].w, boxes[i].h, &boxes[i].xvel, &boxes[i].yvel, 1, 20, screen_height - 20, screen_width-20, 20);
+			//Right Wall
+			fill_Rectangle(my_own_buffer, screen_width, screen_height, screen_width - 20, 0, 20, screen_height, 255, 0, 0, 255);
+			impulse_Immovable_Object(boxes[i].x, boxes[i].y, boxes[i].w, boxes[i].h, &boxes[i].xvel, &boxes[i].yvel, 1, screen_width - 20, 0, 20, screen_height);
+
+			boxes[i].x += boxes[i].xvel;
+			boxes[i].y += boxes[i].yvel;
+				
+		}
 
 		for (int i = 0; i < max_boxes; i++)
 		{

@@ -16,10 +16,22 @@ int screen_height = 600;
 
 SDL_Window *window = NULL;
 
-
 //Alternative example
 struct Pixel
 {
+	unsigned char r, g, b, a;
+};
+
+struct Boxes
+{
+	float x, y, w, h, sx, sy;
+	int alive;
+	unsigned char r, g, b, a;
+};
+
+struct Border
+{
+	float x, y, w, h;
 	unsigned char r, g, b, a;
 };
 
@@ -231,19 +243,74 @@ int main(int argc, char **argv)
 
 	unsigned char *my_own_buffer = (unsigned char*)malloc(sizeof(unsigned char)*screen_width*screen_height * 4);
 
-	float box_size = 60;
-	float box_x = 200;
-	float box_y = 100;
-	float Xvelocity = 1.0 - 2.0 * rand() / RAND_MAX;
-	float Yvelocity = 1.0 - 2.0 * rand() / RAND_MAX;
+	int max_boxes = 6;
+	float box_size = 15;
+
+	Boxes *boxes = (Boxes*)malloc(sizeof(Boxes)* max_boxes);
+
+	for (int i = 0; i < max_boxes; i++)
+	{
+		boxes[i].x = rand() % 740 + 30;
+		boxes[i].y = rand() % 540 + 30;
+		boxes[i].w = box_size;
+		boxes[i].h = box_size;
+		boxes[i].sx = 1 - 2.0 * rand() / RAND_MAX;
+		boxes[i].sy = 1 - 2.0 * rand() / RAND_MAX;
+		boxes[i].alive = 0;
+		boxes[i].r = rand() % 255;
+		boxes[i].g = rand() % 255;
+		boxes[i].b = rand() % 255;
+		boxes[i].a = 255;
+	}
+
+	Border top_wall;
+	top_wall.x = 0;
+	top_wall.y = 0;
+	top_wall.w = screen_width;
+	top_wall.h = 20;
+	top_wall.r = 0;
+	top_wall.g = 255;
+	top_wall.b = 0;
+	top_wall.a = 255;
+
+	Border bottom_wall;
+	bottom_wall.x = 0;
+	bottom_wall.y = screen_height - 20;
+	bottom_wall.w = screen_width;
+	bottom_wall.h = 20;
+	bottom_wall.r = 0;
+	bottom_wall.g = 255;
+	bottom_wall.b = 0;
+	bottom_wall.a = 255;
+
+	Border left_wall;
+	left_wall.x = 0;
+	left_wall.y = 0;
+	left_wall.w = 20;
+	left_wall.h = screen_height;
+	left_wall.r = 0;
+	left_wall.g = 255;
+	left_wall.b = 0;
+	left_wall.a = 255;
+
+	Border right_wall;
+	right_wall.x = screen_width - 20;
+	right_wall.y = 0;
+	right_wall.w = 20;
+	right_wall.h = screen_height;
+	right_wall.r = 0;
+	right_wall.g = 255;
+	right_wall.b = 0;
+	right_wall.a = 255;
+
+
 	float box_mass1 = 1;
 	float wall_edges = 10;
 	int num_of_walls = 4;
-	int max_boxes = 3;
-
-	int *walls = (int*)malloc(sizeof(int)* num_of_walls);
-	int *boxes = (int*)malloc(sizeof(int)* max_boxes);
 	int bounce = 0;//counter for number of bounces
+
+	unsigned int lastTime = 0, currentTime;
+	
 
 	for (;;)
 	{
@@ -266,27 +333,30 @@ int main(int argc, char **argv)
 			my_own_buffer[i * 4 + 3] = 0;//a
 		}
 
-		
+		currentTime = SDL_GetTicks();
+
+		printf("time: %d\n", currentTime);
+
+		if (currentTime <= 5000)
+		{
+
+		}
+
 
 		//Top Wall
 		fill_Rectangle(my_own_buffer, screen_width, screen_height, 0, 0, screen_width, 10, 255, 0, 0, 255);
-		impulse_Immovable_Object(box_x, box_y, box_size, box_size, &Xvelocity, &Yvelocity, box_mass1, 0, 0, screen_width, 10);
+		//impulse_Immovable_Object(box_x, box_y, box_size, box_size, &Xvelocity, &Yvelocity, box_mass1, 0, 0, screen_width, 10);
 		//Left Wall
 		fill_Rectangle(my_own_buffer, screen_width, screen_height, 0, 0, 10, screen_height, 255, 0, 0, 255);
-		impulse_Immovable_Object(box_x, box_y, box_size, box_size, &Xvelocity, &Yvelocity, box_mass1, 0, 0, screen_height, 10);
+		//impulse_Immovable_Object(box_x, box_y, box_size, box_size, &Xvelocity, &Yvelocity, box_mass1, 0, 0, screen_height, 10);
 		//Bottom Wall
 		fill_Rectangle(my_own_buffer, screen_width, screen_height, 0, screen_height - 10, screen_width, 10, 255, 0, 0, 255);
-		impulse_Immovable_Object(box_x, box_y, box_size, box_size, &Xvelocity, &Yvelocity, box_mass1, 0, screen_height-10, screen_width, 10);
+		//impulse_Immovable_Object(box_x, box_y, box_size, box_size, &Xvelocity, &Yvelocity, box_mass1, 0, screen_height-10, screen_width, 10);
 		//Right Wall
 		fill_Rectangle(my_own_buffer, screen_width, screen_height, screen_width - 10, 0, 10, screen_height, 255, 0, 0, 255);
-		impulse_Immovable_Object(box_x, box_y, box_size, box_size, &Xvelocity, &Yvelocity, box_mass1, -10, 0, 10, screen_height);
+		//impulse_Immovable_Object(box_x, box_y, box_size, box_size, &Xvelocity, &Yvelocity, box_mass1, -10, 0, 10, screen_height);
 
-		for (int i = 0; i < *boxes; i++)
-		{
-			fill_Rectangle(my_own_buffer, screen_width, screen_height, box_x, box_y, box_size, box_size, 255, 255, 0, 255);
-			impulse_Collision(box_x, box_y, box_size, box_size, &Xvelocity, &Yvelocity, box_mass1, box_x, box_y, box_size, box_size, &Xvelocity, &Yvelocity, box_mass1);
-
-		}
+		
 		
 		//fill_Rectangle(my_own_buffer, screen_width, screen_height, box_x1, box_y1, box_size, box_size, 255, 0, 0, 255);
 		
