@@ -394,6 +394,7 @@ int main(int argc, char **argv)
 			//Right Wall
 			fill_Rectangle(my_own_buffer, screen_width, screen_height, right_wall.x, right_wall.y, right_wall.w, right_wall.h, right_wall.r, right_wall.g, right_wall.b, right_wall.a);
 			int right_collision = impulse_Immovable_Object(boxes[i].x, boxes[i].y, boxes[i].w, boxes[i].h, &boxes[i].sx, &boxes[i].sy, box_mass1, right_wall.x, right_wall.y, right_wall.w, right_wall.h);
+
 			if (top_collision == 1 || left_collision == 1 || bottom_collision == 1 || right_collision == 1)
 			{
 				bounces++;
