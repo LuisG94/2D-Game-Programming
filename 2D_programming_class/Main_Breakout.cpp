@@ -360,6 +360,7 @@ int main(int argc, char **argv)
 		int box_y = 100;
 		int box_x = 65;
 		int x;
+
 		for (int i = 0; i < 5; i++)
 		{
 			//boxes[i].x = 65;

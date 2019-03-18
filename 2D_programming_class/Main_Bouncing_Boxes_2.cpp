@@ -98,7 +98,7 @@ int direction_Collision(float x, float y, float w, float h, float x1, float y1, 
 	return no_collision;
 }
 
-void impulse_Collision(float x, float y, float w, float h, float *Xvec, float *Yvec, float mass_a, float x1, float y1, float w1, float h1, float *Xvec1, float *Yvec1, float mass_b)
+int impulse_Collision(float x, float y, float w, float h, float *Xvec, float *Yvec, float mass_a, float x1, float y1, float w1, float h1, float *Xvec1, float *Yvec1, float mass_b)
 {
 	float normal_x;
 	float normal_y;
@@ -129,6 +129,7 @@ void impulse_Collision(float x, float y, float w, float h, float *Xvec, float *Y
 	{
 		normal_x = 0;
 		normal_y = 0;
+		return 0;
 	}
 
 	float relative_velocity_x = *Xvec1 - *Xvec;
@@ -136,7 +137,7 @@ void impulse_Collision(float x, float y, float w, float h, float *Xvec, float *Y
 
 	float dot = (relative_velocity_x * normal_x) + (relative_velocity_y * normal_y);
 
-	if (dot < 0) return;
+	if (dot < 0) return 1;
 
 	float bounce = 1.0; //1.0 bounce, 0.0 mud
 	float mass = -(1.0 + bounce) * dot / (mass_a + mass_b);
@@ -168,9 +169,10 @@ void impulse_Collision(float x, float y, float w, float h, float *Xvec, float *Y
 
 	*Xvec1 += tangent_x;
 	*Yvec1 += tangent_y;
+	return 1;
 }
 
-void impulse_Immovable_Object(float x, float y, float w, float h, float *Xvec, float *Yvec, float mass_a, float x1, float y1, float w1, float h1)
+int impulse_Immovable_Object(float x, float y, float w, float h, float *Xvec, float *Yvec, float mass_a, float x1, float y1, float w1, float h1)
 {
 	float normal_x;
 	float normal_y;
@@ -201,6 +203,7 @@ void impulse_Immovable_Object(float x, float y, float w, float h, float *Xvec, f
 	{
 		normal_x = 0;
 		normal_y = 0;
+		return 0;
 	}
 
 	x = -*Xvec;
@@ -208,7 +211,7 @@ void impulse_Immovable_Object(float x, float y, float w, float h, float *Xvec, f
 
 	float dot = (x * normal_x) + (y * normal_y);
 
-	if (dot < 0) return;
+	if (dot < 0) return 1;
 
 	float e = 1.0;
 	float j = -(1.0 + e) * dot / (mass_a);
@@ -221,6 +224,7 @@ void impulse_Immovable_Object(float x, float y, float w, float h, float *Xvec, f
 
 	*Xvec -= impulse_x;
 	*Yvec -= impulse_y;
+	return 1;
 	
 }
 
@@ -243,8 +247,8 @@ int main(int argc, char **argv)
 
 	unsigned char *my_own_buffer = (unsigned char*)malloc(sizeof(unsigned char)*screen_width*screen_height * 4);
 
-	int max_boxes = 6;
-	float box_size = 15;
+	const int max_boxes = 5;
+	float box_size = 25;
 
 	Boxes *boxes = (Boxes*)malloc(sizeof(Boxes)* max_boxes);
 
@@ -303,14 +307,15 @@ int main(int argc, char **argv)
 	right_wall.b = 0;
 	right_wall.a = 255;
 
-
 	float box_mass1 = 1;
-	float wall_edges = 10;
-	int num_of_walls = 4;
-	int bounce = 0;//counter for number of bounces
+	int collision;
+	int bounces = 0;//counter for number of bounces
 
-	unsigned int lastTime = 0, currentTime;
+	unsigned int lastTime = 0, currentTime, elapsed_time;
+	int spawn_time = 2000;
+	int spawn = 0;
 	
+	int start_time = SDL_GetTicks();
 
 	for (;;)
 	{
@@ -335,31 +340,75 @@ int main(int argc, char **argv)
 
 		currentTime = SDL_GetTicks();
 
-		printf("time: %d\n", currentTime);
+		//printf("time inside forloop: %d\n", currentTime);
 
-		if (currentTime <= 5000)
+		elapsed_time = currentTime - start_time;
+
+		//printf("elapsed time-----> %d\n",elapsed_time);
+
+		if (elapsed_time >= spawn_time)
 		{
-
+			spawn = 1;
+			start_time = SDL_GetTicks();
 		}
+		
+		for (int i = 0; i < max_boxes; i++)
+		{
+			if (spawn == 1)
+			{
+				if (boxes[i].alive == 0)
+				{
+					spawn = 0;
+					boxes[i].alive = 1;
+				}
+			}
+
+			for (int j = i + 1; j < max_boxes; j++)
+			{
+				collision = impulse_Collision(boxes[i].x, boxes[i].y, boxes[i].w, boxes[i].h, &boxes[i].sx, &boxes[i].sy, 1, boxes[j].x, boxes[j].y, boxes[j].w, boxes[j].h, &boxes[j].sx, &boxes[j].sy, 1);
+
+				/*if (collision == 1)
+				{
+					bounces++;
+					printf("bounces----------%d\n", bounces);
+
+					if (bounces >= 3)
+					{
+						boxes[j].alive = 0;
+					}
+				}*/
+			}
+
+			//Top Wall
+			fill_Rectangle(my_own_buffer, screen_width, screen_height, top_wall.x, top_wall.y, top_wall.w, top_wall.h, top_wall.r, top_wall.g, top_wall.b, top_wall.a);
+			int top_collision = impulse_Immovable_Object(boxes[i].x, boxes[i].y, boxes[i].w, boxes[i].h, &boxes[i].sx, &boxes[i].sy, box_mass1, top_wall.x, top_wall.y, top_wall.w, top_wall.h);
+			
+			//Left Wall
+			fill_Rectangle(my_own_buffer, screen_width, screen_height, left_wall.x, left_wall.y, left_wall.w, left_wall.h, left_wall.r, left_wall.g, left_wall.b, left_wall.a);
+			int left_collision = impulse_Immovable_Object(boxes[i].x, boxes[i].y, boxes[i].w, boxes[i].h, &boxes[i].sx, &boxes[i].sy, box_mass1, left_wall.x, left_wall.y, left_wall.w, left_wall.h);
+			
+			//Bottom Wall
+			fill_Rectangle(my_own_buffer, screen_width, screen_height, bottom_wall.x, bottom_wall.y, bottom_wall.w, bottom_wall.h, bottom_wall.r, bottom_wall.g, bottom_wall.b, bottom_wall.a);
+			int bottom_collision = impulse_Immovable_Object(boxes[i].x, boxes[i].y, boxes[i].w, boxes[i].h, &boxes[i].sx, &boxes[i].sy, box_mass1, bottom_wall.x, bottom_wall.y, bottom_wall.w, bottom_wall.h);
+			
+			//Right Wall
+			fill_Rectangle(my_own_buffer, screen_width, screen_height, right_wall.x, right_wall.y, right_wall.w, right_wall.h, right_wall.r, right_wall.g, right_wall.b, right_wall.a);
+			int right_collision = impulse_Immovable_Object(boxes[i].x, boxes[i].y, boxes[i].w, boxes[i].h, &boxes[i].sx, &boxes[i].sy, box_mass1, right_wall.x, right_wall.y, right_wall.w, right_wall.h);
+			if (top_collision == 1 || left_collision == 1 || bottom_collision == 1 || right_collision == 1)
+			{
+				bounces++;
+				printf("bounces-------->%d\n",bounces);
+			}
 
 
-		//Top Wall
-		fill_Rectangle(my_own_buffer, screen_width, screen_height, 0, 0, screen_width, 10, 255, 0, 0, 255);
-		//impulse_Immovable_Object(box_x, box_y, box_size, box_size, &Xvelocity, &Yvelocity, box_mass1, 0, 0, screen_width, 10);
-		//Left Wall
-		fill_Rectangle(my_own_buffer, screen_width, screen_height, 0, 0, 10, screen_height, 255, 0, 0, 255);
-		//impulse_Immovable_Object(box_x, box_y, box_size, box_size, &Xvelocity, &Yvelocity, box_mass1, 0, 0, screen_height, 10);
-		//Bottom Wall
-		fill_Rectangle(my_own_buffer, screen_width, screen_height, 0, screen_height - 10, screen_width, 10, 255, 0, 0, 255);
-		//impulse_Immovable_Object(box_x, box_y, box_size, box_size, &Xvelocity, &Yvelocity, box_mass1, 0, screen_height-10, screen_width, 10);
-		//Right Wall
-		fill_Rectangle(my_own_buffer, screen_width, screen_height, screen_width - 10, 0, 10, screen_height, 255, 0, 0, 255);
-		//impulse_Immovable_Object(box_x, box_y, box_size, box_size, &Xvelocity, &Yvelocity, box_mass1, -10, 0, 10, screen_height);
+			boxes[i].x += boxes[i].sx;
+			boxes[i].y += boxes[i].sy;
 
-		
-		
-		//fill_Rectangle(my_own_buffer, screen_width, screen_height, box_x1, box_y1, box_size, box_size, 255, 0, 0, 255);
-		
+			if (boxes[i].alive == 1)
+			{
+				fill_Rectangle(my_own_buffer, screen_width, screen_width, boxes[i].x, boxes[i].y, boxes[i].w, boxes[i].h, boxes[i].r, boxes[i].g, boxes[i].b, boxes[i].a);
+			}
+		}
 		
 		memcpy(your_draw_buffer->pixels, my_own_buffer, sizeof(unsigned char)*screen_width*screen_height * 4);
 
@@ -368,6 +417,5 @@ int main(int argc, char **argv)
 		SDL_BlitScaled(your_draw_buffer, NULL, screen, NULL);
 		SDL_UpdateWindowSurface(window);
 	}
-
 	return 0;
 }
