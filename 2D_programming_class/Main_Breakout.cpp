@@ -381,7 +381,7 @@ int main(int argc, char **argv)
 		
 
 		//draw boxes in rows and cols
-		/*for (int i = 0; i < max_rows; i++)
+		for (int i = 0; i < max_rows; i++)
 		{
 			//int box_x = 65;
 			boxes[i].x = 65;
@@ -406,7 +406,7 @@ int main(int argc, char **argv)
 				boxes[i].x = boxes[i].x + 70;
 			}
 			//boxes[i].y = boxes[i].y + 60;
-		}*/
+		}
 
 		memcpy(your_draw_buffer->pixels, my_own_buffer, sizeof(unsigned char)*screen_width*screen_height * 4);
 
