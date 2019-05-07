@@ -122,7 +122,7 @@ int within_enemy_radius(Boxes p, Boxes *e)
 int main(int argc, char **argv)
 {
 
-	char *font_filename = "font_sheet.png";
+	const char *font_filename = "font_sheet.png";
 
 	SDL_Init(SDL_INIT_VIDEO);
 	
@@ -146,7 +146,7 @@ int main(int argc, char **argv)
 
 	
 	SDL_Surface *font_surface = IMG_Load(font_filename);
-	assert(&font_surface);
+	//assert(font_surface);
 	SDL_Texture *font_texture = SDL_CreateTextureFromSurface(renderer, font_surface);
 	SDL_FreeSurface(font_surface);
 	
