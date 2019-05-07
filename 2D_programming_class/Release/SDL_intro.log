@@ -1,28 +1,30 @@
-﻿  Dungeon_Crawler.cpp
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\dungeon_crawler.cpp(73): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\dungeon_crawler.cpp(74): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\dungeon_crawler.cpp(75): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\dungeon_crawler.cpp(76): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\dungeon_crawler.cpp(141): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\dungeon_crawler.cpp(142): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\dungeon_crawler.cpp(173): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\dungeon_crawler.cpp(182): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\dungeon_crawler.cpp(183): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\dungeon_crawler.cpp(194): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\dungeon_crawler.cpp(201): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\dungeon_crawler.cpp(204): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\dungeon_crawler.cpp(249): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\dungeon_crawler.cpp(251): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\dungeon_crawler.cpp(257): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'double'
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\dungeon_crawler.cpp(382): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\dungeon_crawler.cpp(386): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\dungeon_crawler.cpp(387): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\dungeon_crawler.cpp(388): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\dungeon_crawler.cpp(389): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\luis\documents\github\2d-game-programming\2d_programming_class\dungeon_crawler.cpp(393): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+﻿  Main_Bouncing_Boxes_2.cpp
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Main_Bouncing_Boxes_2.cpp(69): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Main_Bouncing_Boxes_2.cpp(70): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Main_Bouncing_Boxes_2.cpp(71): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Main_Bouncing_Boxes_2.cpp(72): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Main_Bouncing_Boxes_2.cpp(143): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Main_Bouncing_Boxes_2.cpp(157): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Main_Bouncing_Boxes_2.cpp(217): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Main_Bouncing_Boxes_2.cpp(257): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Main_Bouncing_Boxes_2.cpp(258): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Main_Bouncing_Boxes_2.cpp(261): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Main_Bouncing_Boxes_2.cpp(262): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Main_Bouncing_Boxes_2.cpp(273): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Main_Bouncing_Boxes_2.cpp(282): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Main_Bouncing_Boxes_2.cpp(283): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Main_Bouncing_Boxes_2.cpp(294): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Main_Bouncing_Boxes_2.cpp(301): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Main_Bouncing_Boxes_2.cpp(304): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Main_Bouncing_Boxes_2.cpp(349): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Main_Bouncing_Boxes_2.cpp(383): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Main_Bouncing_Boxes_2.cpp(387): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Main_Bouncing_Boxes_2.cpp(391): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Main_Bouncing_Boxes_2.cpp(395): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Main_Bouncing_Boxes_2.cpp(410): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
   Generating code
-  1 of 7 functions (14.3%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
+  9 of 9 functions (100.0%) were compiled.
+    4 functions were new in current compilation
     0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   SDL_intro.vcxproj -> C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class\Release\SDL_intro.exe

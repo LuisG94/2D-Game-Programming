@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Dungeon_Crawler.cpp">
+    <ClCompile Include="..\2D_programming_class11\Main_Bouncing_Boxes_2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

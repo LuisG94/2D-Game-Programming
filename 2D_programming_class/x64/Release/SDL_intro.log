@@ -1,0 +1,45 @@
+﻿  Dungeon_Crawler.cpp
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Dungeon_Crawler.cpp(75): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Dungeon_Crawler.cpp(76): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Dungeon_Crawler.cpp(77): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Dungeon_Crawler.cpp(78): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Dungeon_Crawler.cpp(110): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'double'
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Dungeon_Crawler.cpp(112): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'double'
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Dungeon_Crawler.cpp(130): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Dungeon_Crawler.cpp(226): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Dungeon_Crawler.cpp(227): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Dungeon_Crawler.cpp(228): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Dungeon_Crawler.cpp(229): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Dungeon_Crawler.cpp(415): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Dungeon_Crawler.cpp(416): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Dungeon_Crawler.cpp(417): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Dungeon_Crawler.cpp(418): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Dungeon_Crawler.cpp(419): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Dungeon_Crawler.cpp(420): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Dungeon_Crawler.cpp(421): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Dungeon_Crawler.cpp(422): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Dungeon_Crawler.cpp(448): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Dungeon_Crawler.cpp(672): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Dungeon_Crawler.cpp(683): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Dungeon_Crawler.cpp(684): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+Dungeon_Crawler.obj : error LNK2001: unresolved external symbol SDL_GetWindowSurface
+Dungeon_Crawler.obj : error LNK2001: unresolved external symbol SDL_GetKeyboardState
+Dungeon_Crawler.obj : error LNK2001: unresolved external symbol SDL_RenderClear
+Dungeon_Crawler.obj : error LNK2001: unresolved external symbol SDL_Init
+Dungeon_Crawler.obj : error LNK2001: unresolved external symbol SDL_CreateTexture
+Dungeon_Crawler.obj : error LNK2001: unresolved external symbol SDL_CreateRGBSurfaceWithFormat
+Dungeon_Crawler.obj : error LNK2001: unresolved external symbol SDL_SetSurfaceBlendMode
+Dungeon_Crawler.obj : error LNK2001: unresolved external symbol SDL_PollEvent
+Dungeon_Crawler.obj : error LNK2001: unresolved external symbol SDL_GetTicks
+Dungeon_Crawler.obj : error LNK2001: unresolved external symbol SDL_RenderCopyEx
+Dungeon_Crawler.obj : error LNK2001: unresolved external symbol SDL_FreeSurface
+Dungeon_Crawler.obj : error LNK2001: unresolved external symbol IMG_Load
+Dungeon_Crawler.obj : error LNK2001: unresolved external symbol SDL_CreateRenderer
+Dungeon_Crawler.obj : error LNK2001: unresolved external symbol SDL_RenderPresent
+Dungeon_Crawler.obj : error LNK2001: unresolved external symbol SDL_RenderFillRect
+Dungeon_Crawler.obj : error LNK2001: unresolved external symbol SDL_CreateWindow
+Dungeon_Crawler.obj : error LNK2001: unresolved external symbol SDL_SetRenderDrawColor
+Dungeon_Crawler.obj : error LNK2001: unresolved external symbol SDL_CreateTextureFromSurface
+Dungeon_Crawler.obj : error LNK2001: unresolved external symbol SDL_SetTextureAlphaMod
+MSVCRT.lib(exe_main.obj) : error LNK2001: unresolved external symbol main
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class\x64\Release\SDL_intro.exe : fatal error LNK1120: 20 unresolved externals
