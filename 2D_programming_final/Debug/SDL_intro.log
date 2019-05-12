@@ -1,0 +1,25 @@
+﻿  Dungeon_Crawler.cpp
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Dungeon_Crawler.cpp(75): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Dungeon_Crawler.cpp(76): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Dungeon_Crawler.cpp(77): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Dungeon_Crawler.cpp(78): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Dungeon_Crawler.cpp(110): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'double'
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Dungeon_Crawler.cpp(112): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'double'
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Dungeon_Crawler.cpp(125): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Dungeon_Crawler.cpp(223): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Dungeon_Crawler.cpp(224): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Dungeon_Crawler.cpp(225): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Dungeon_Crawler.cpp(226): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Dungeon_Crawler.cpp(412): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Dungeon_Crawler.cpp(413): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Dungeon_Crawler.cpp(414): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Dungeon_Crawler.cpp(415): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Dungeon_Crawler.cpp(416): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Dungeon_Crawler.cpp(417): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Dungeon_Crawler.cpp(418): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Dungeon_Crawler.cpp(419): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Dungeon_Crawler.cpp(445): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Dungeon_Crawler.cpp(628): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Dungeon_Crawler.cpp(639): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Dungeon_Crawler.cpp(640): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  SDL_intro.vcxproj -> C:\Users\Luis\Documents\GitHub\2D-Game-Programming\2D_programming_class11\Debug\SDL_intro.exe
